@@ -1,0 +1,41 @@
+package com.example.rickandmorty.data
+
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.example.rickandmorty.data.network.models.Result
+import com.example.rickandmorty.data.network.RickAndMortyCharactersRepository
+
+class CharacterDataSource(
+    private val throwable: MutableLiveData<Throwable?>
+) : PagingSource<Int, Result>() {
+
+    private val repository = RickAndMortyCharactersRepository()
+
+    override fun getRefreshKey(state: PagingState<Int, Result>): Int = FIRST_PAGE
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
+        val page = params.key ?: FIRST_PAGE
+        return kotlin.runCatching {
+            repository.getRickAndMortyCharacters(page)
+        }.fold(
+            onSuccess = {
+                Log.d("FAILTAG", "Characters success: $it")
+                LoadResult.Page(
+                    data = it,
+                    prevKey = null,
+                    nextKey = if (it.isEmpty()) null else page + 1
+                )
+            },
+            onFailure = {
+                throwable.value=it
+                Log.d("FAILTAG", "Characters fail: $it")
+                LoadResult.Error(it)
+            })
+    }
+
+    private companion object {
+        private const val FIRST_PAGE = 1
+    }
+}
