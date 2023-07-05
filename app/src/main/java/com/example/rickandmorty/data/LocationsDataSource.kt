@@ -1,17 +1,15 @@
 package com.example.rickandmorty.data
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rickandmorty.data.network.RickAndMortyCharactersRepository
+import com.example.rickandmorty.data.network.RickAndMortyRepository
 import com.example.rickandmorty.data.network.models.LocationsDto
 
 class LocationsDataSource(
-    private val throwable: MutableLiveData<Throwable?>
+    private val repository: RickAndMortyRepository
 ) : PagingSource<Int, LocationsDto>() {
 
-    private val repository = RickAndMortyCharactersRepository()
 
     override fun getRefreshKey(state: PagingState<Int, LocationsDto>): Int = FIRST_PAGE
 
@@ -30,7 +28,6 @@ class LocationsDataSource(
 
             },
             onFailure = {
-                throwable.value=it
                 Log.d("FAILTAG", "Location fail: $it")
                 LoadResult.Error(it)
             })

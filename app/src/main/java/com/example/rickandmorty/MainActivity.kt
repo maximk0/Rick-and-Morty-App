@@ -13,8 +13,10 @@ import com.example.rickandmorty.compose.theme.ComposeTrainingTheme
 import com.example.rickandmorty.compose.theme.Gray1200
 import com.example.rickandmorty.compose.RickAndMortyApp
 import com.example.rickandmorty.viewmodels.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 @Keep
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()

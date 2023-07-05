@@ -46,7 +46,7 @@ fun RickAndMortyNavHost(
             )
         }
         composable("location") {
-            LocationScreen(viewModel = viewModel)
+            LocationScreen()
         }
     }
 }
