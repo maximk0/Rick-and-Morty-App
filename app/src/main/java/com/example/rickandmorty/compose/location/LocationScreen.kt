@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.rickandmorty.presentation.MainViewModel
+import com.example.rickandmorty.viewmodels.MainViewModel
 import androidx.paging.compose.items
 
 @Composable

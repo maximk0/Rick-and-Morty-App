@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.rickandmorty.compose.character.CharacterScreen
 import com.example.rickandmorty.compose.location.LocationScreen
-import com.example.rickandmorty.presentation.MainViewModel
+import com.example.rickandmorty.viewmodels.MainViewModel
 import com.example.rickandmorty.compose.home.HomeScreen
 import com.example.rickandmorty.compose.home.RickAndMortyPage
 

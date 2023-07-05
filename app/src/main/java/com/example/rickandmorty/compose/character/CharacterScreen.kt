@@ -30,7 +30,7 @@ import com.example.rickandmorty.compose.theme.Gray120
 import com.example.rickandmorty.compose.theme.Gray1200
 import com.example.rickandmorty.compose.theme.Gray80
 import com.example.rickandmorty.compose.theme.Gray900
-import com.example.rickandmorty.presentation.MainViewModel
+import com.example.rickandmorty.viewmodels.MainViewModel
 import com.example.rickandmorty.compose.utils.CharacterImage
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
