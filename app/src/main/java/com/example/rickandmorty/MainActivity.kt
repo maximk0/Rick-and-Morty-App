@@ -12,14 +12,14 @@ import androidx.compose.ui.Modifier
 import com.example.rickandmorty.compose.theme.ComposeTrainingTheme
 import com.example.rickandmorty.compose.theme.Gray1200
 import com.example.rickandmorty.compose.RickAndMortyApp
-import com.example.rickandmorty.viewmodels.MainViewModel
+import com.example.rickandmorty.viewmodels.ChatactersModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @Keep
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: ChatactersModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

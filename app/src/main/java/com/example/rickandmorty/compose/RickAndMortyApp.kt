@@ -8,13 +8,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.rickandmorty.compose.character.CharacterScreen
 import com.example.rickandmorty.compose.location.LocationScreen
-import com.example.rickandmorty.viewmodels.MainViewModel
+import com.example.rickandmorty.viewmodels.ChatactersModel
 import com.example.rickandmorty.compose.home.HomeScreen
 import com.example.rickandmorty.compose.home.RickAndMortyPage
 
 @Composable
 fun RickAndMortyApp(
-    viewModel: MainViewModel = viewModel(),
+    viewModel: ChatactersModel = viewModel(),
     onPageChange: (RickAndMortyPage) -> Unit = {}
 ) {
     val navController = rememberNavController()
@@ -27,7 +27,7 @@ fun RickAndMortyApp(
 
 @Composable
 fun RickAndMortyNavHost(
-    viewModel: MainViewModel = viewModel(),
+    viewModel: ChatactersModel = viewModel(),
     navController: NavHostController,
     onPageChange: (RickAndMortyPage) -> Unit = {},
 ) {
