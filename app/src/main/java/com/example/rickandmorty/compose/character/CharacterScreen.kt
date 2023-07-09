@@ -26,17 +26,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.rickandmorty.compose.theme.Gray120
 import com.example.rickandmorty.compose.theme.Gray1200
 import com.example.rickandmorty.compose.theme.Gray80
 import com.example.rickandmorty.compose.theme.Gray900
-import com.example.rickandmorty.viewmodels.MainViewModel
+import com.example.rickandmorty.viewmodels.ChatactersModel
 import com.example.rickandmorty.compose.utils.CharacterImage
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CharacterScreen(
-    viewModel: MainViewModel,
+    viewModel: ChatactersModel =  hiltViewModel(),
     onBackClick: () -> Unit,
 ) {
     val character = viewModel.character

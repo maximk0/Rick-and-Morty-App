@@ -14,12 +14,10 @@ import com.example.rickandmorty.compose.home.RickAndMortyPage
 
 @Composable
 fun RickAndMortyApp(
-    viewModel: ChatactersModel = viewModel(),
     onPageChange: (RickAndMortyPage) -> Unit = {}
 ) {
     val navController = rememberNavController()
     RickAndMortyNavHost(
-        viewModel = viewModel,
         navController = navController,
         onPageChange = onPageChange,
     )
@@ -27,21 +25,18 @@ fun RickAndMortyApp(
 
 @Composable
 fun RickAndMortyNavHost(
-    viewModel: ChatactersModel = viewModel(),
     navController: NavHostController,
     onPageChange: (RickAndMortyPage) -> Unit = {},
 ) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
             HomeScreen(
-                viewModel = viewModel,
                 onCharacterClick = { navController.navigate("character") },
                 onPageChange = onPageChange
             )
         }
         composable("character") {
             CharacterScreen(
-                viewModel = viewModel,
                  onBackClick = { navController.navigateUp() }
             )
         }

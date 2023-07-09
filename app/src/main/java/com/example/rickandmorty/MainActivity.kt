@@ -3,7 +3,6 @@ package com.example.rickandmorty
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,14 +11,11 @@ import androidx.compose.ui.Modifier
 import com.example.rickandmorty.compose.theme.ComposeTrainingTheme
 import com.example.rickandmorty.compose.theme.Gray1200
 import com.example.rickandmorty.compose.RickAndMortyApp
-import com.example.rickandmorty.viewmodels.ChatactersModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @Keep
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    private val viewModel: ChatactersModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Gray1200
                 ) {
-                    RickAndMortyApp(viewModel = viewModel)
+                    RickAndMortyApp()
                 }
             }
         }
