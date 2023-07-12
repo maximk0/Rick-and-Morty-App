@@ -1,7 +1,6 @@
 package com.example.rickandmorty.data.network
 
 import android.util.Log
-import com.example.rickandmorty.api.RetrofitInstance
 import com.example.rickandmorty.api.RickAndMortyApi
 import com.example.rickandmorty.data.network.models.LocationsDto
 import com.example.rickandmorty.data.network.models.EpisodesDto
@@ -13,17 +12,17 @@ class RickAndMortyRepository @Inject constructor(
 )  {
 
     suspend fun getRickAndMortyCharacters(page: Int): List<Result> {
-        Log.d("REPOSITORY", "${RetrofitInstance.rickAndMortyApi.loadList(page).results}")
+        Log.d("REPOSITORY", "${rickAndMortyApi.loadList(page).results}")
         return rickAndMortyApi.loadList(page).results
     }
 
     suspend fun getEpisode(id: String) : EpisodesDto {
-        Log.d("REPOSITORY", "${RetrofitInstance.rickAndMortyApi.getEpisode(id)}")
+        Log.d("REPOSITORY", "${rickAndMortyApi.getEpisode(id)}")
         return rickAndMortyApi.getEpisode(id)
     }
 
     suspend fun getListOfEpisodes(id: String): List<EpisodesDto> {
-        Log.d("REPOSITORY", "${RetrofitInstance.rickAndMortyApi.getEpisodeList(id)}")
+        Log.d("REPOSITORY", "${rickAndMortyApi.getEpisodeList(id)}")
         return rickAndMortyApi.getEpisodeList(id)
     }
 

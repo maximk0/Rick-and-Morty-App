@@ -9,19 +9,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://rickandmortyapi.com"
-
-object RetrofitInstance {
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
-
-    val rickAndMortyApi: RickAndMortyApi = retrofit.create(RickAndMortyApi::class.java)
-
-}
-
 interface RickAndMortyApi {
 
     @GET("/api/character?")
