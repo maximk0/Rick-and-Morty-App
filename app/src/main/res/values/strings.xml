@@ -3,4 +3,7 @@
     <string name="last_location">Last known location:</string>
     <string name="all_characters">Characters</string>
     <string name="location">Location</string>
+    <string name="oops">Oops</string>
+    <string name="retry">Retry</string>
+    <string name="error">Error: %s</string>
 </resources>

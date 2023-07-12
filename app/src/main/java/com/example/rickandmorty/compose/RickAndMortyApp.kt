@@ -1,14 +1,12 @@
 package com.example.rickandmorty.compose
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.rickandmorty.compose.character.CharacterScreen
 import com.example.rickandmorty.compose.location.LocationScreen
-import com.example.rickandmorty.viewmodels.ChatactersModel
 import com.example.rickandmorty.compose.home.HomeScreen
 import com.example.rickandmorty.compose.home.RickAndMortyPage
 

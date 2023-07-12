@@ -26,7 +26,7 @@ import com.example.rickandmorty.compose.theme.Gray120
 import com.example.rickandmorty.compose.theme.Gray80
 import com.example.rickandmorty.compose.theme.GrayNav
 import kotlinx.coroutines.launch
-import com.example.rickandmorty.viewmodels.ChatactersModel
+import com.example.rickandmorty.viewmodels.CharactersViewModel
 
 
 enum class RickAndMortyPage(
@@ -41,12 +41,14 @@ enum class RickAndMortyPage(
 
 @Composable
 fun HomeScreen(
-    viewModel: ChatactersModel =  hiltViewModel(),
+//    viewModel: CharactersViewModel = hiltViewModel(),
     onCharacterClick: () -> Unit = {},
     onPageChange: (RickAndMortyPage) -> Unit = {},
 ) {
     HomePagerScreen(
-        viewModel = viewModel, onCharacterClick = onCharacterClick, onPageChange = onPageChange
+//        viewModel = viewModel,
+        onCharacterClick = onCharacterClick,
+        onPageChange = onPageChange
     )
 }
 
@@ -54,7 +56,7 @@ fun HomeScreen(
 @Composable
 fun HomePagerScreen(
     modifier: Modifier = Modifier,
-    viewModel: ChatactersModel = viewModel(),
+//    viewModel: CharactersViewModel = viewModel(),
     onCharacterClick: () -> Unit,
     onPageChange: (RickAndMortyPage) -> Unit,
     pages: Array<RickAndMortyPage> = RickAndMortyPage.values()
@@ -99,6 +101,7 @@ fun HomePagerScreen(
                         onCharacterItemClicked = { onCharacterClick() }
                     )
                 }
+
                 RickAndMortyPage.LOCATION -> {
                     LocationScreen()
                 }

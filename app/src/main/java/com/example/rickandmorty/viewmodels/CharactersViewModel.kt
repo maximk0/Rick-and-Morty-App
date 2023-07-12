@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatactersModel @Inject constructor(
+class CharactersViewModel @Inject constructor(
     private val repository: RickAndMortyRepository
 ) : ViewModel() {
 

@@ -31,13 +31,13 @@ import com.example.rickandmorty.compose.theme.Gray120
 import com.example.rickandmorty.compose.theme.Gray1200
 import com.example.rickandmorty.compose.theme.Gray80
 import com.example.rickandmorty.compose.theme.Gray900
-import com.example.rickandmorty.viewmodels.ChatactersModel
+import com.example.rickandmorty.viewmodels.CharactersViewModel
 import com.example.rickandmorty.compose.utils.CharacterImage
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CharacterScreen(
-    viewModel: ChatactersModel =  hiltViewModel(),
+    viewModel: CharactersViewModel =  hiltViewModel(),
     onBackClick: () -> Unit,
 ) {
     val character = viewModel.character

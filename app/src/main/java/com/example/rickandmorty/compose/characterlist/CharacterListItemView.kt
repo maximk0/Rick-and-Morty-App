@@ -20,13 +20,13 @@ import com.example.rickandmorty.compose.theme.Gray80
 import com.example.rickandmorty.compose.theme.Gray900
 import com.example.rickandmorty.compose.theme.PurpleGrey80
 import com.example.rickandmorty.data.network.models.Result
-import com.example.rickandmorty.viewmodels.ChatactersModel
+import com.example.rickandmorty.viewmodels.CharactersViewModel
 import com.example.rickandmorty.compose.utils.CharacterImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterItem(
-    viewModel: ChatactersModel =  hiltViewModel(),
+    viewModel: CharactersViewModel =  hiltViewModel(),
     character: Result,
     onCharacterItemClicked: (Result) -> Unit,
 ) {
