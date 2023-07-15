@@ -9,7 +9,7 @@ import androidx.paging.cachedIn
 import com.example.rickandmorty.data.CharactersDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import com.example.rickandmorty.data.network.models.Result
+import com.example.rickandmorty.data.network.models.Character
 import com.example.rickandmorty.data.network.models.EpisodesDto
 import com.example.rickandmorty.data.network.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,12 +22,12 @@ class CharactersViewModel @Inject constructor(
     private val repository: RickAndMortyRepository
 ) : ViewModel() {
 
-    var pagedCharacters: Flow<PagingData<Result>> = Pager(
+    var pagedCharacters: Flow<PagingData<Character>> = Pager(
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { CharactersDataSource(repository) }
     ).flow.cachedIn(viewModelScope)
 
-    var character: Result? = null
+//    var character: Result? = null
 
     fun reloadList() {
         pagedCharacters = Pager(

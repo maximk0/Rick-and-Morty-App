@@ -2,7 +2,7 @@ package com.example.rickandmorty.data.network.models
 
 data class CharactersList(
     val info: Info,
-    val results: List<Result>
+    val results: List<Character>
 )
 
 data class Info(
@@ -12,7 +12,7 @@ data class Info(
     val prev: Any
 )
 
-data class Result(
+data class Character(
     val created: String,
     val episode: List<String>,
     val gender: String,

@@ -1,4 +1,4 @@
-package com.example.rickandmorty.compose.utils
+package com.example.rickandmorty.ui.commonUi
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
@@ -14,7 +14,7 @@ import com.example.rickandmorty.R
 @Composable
 fun CharacterImage(
     modifier: Modifier = Modifier,
-    data: Any?,
+    data: String?,
     contentDescription: String? = null,
     contentScale: ContentScale = ContentScale.Fit
 ) {

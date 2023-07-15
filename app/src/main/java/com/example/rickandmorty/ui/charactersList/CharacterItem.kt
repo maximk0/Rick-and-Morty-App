@@ -1,4 +1,4 @@
-package com.example.rickandmorty.compose.characterlist
+package com.example.rickandmorty.ui.charactersList
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -11,30 +11,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.rickandmorty.R
-import com.example.rickandmorty.compose.theme.Gray120
-import com.example.rickandmorty.compose.theme.Gray80
-import com.example.rickandmorty.compose.theme.Gray900
-import com.example.rickandmorty.compose.theme.PurpleGrey80
-import com.example.rickandmorty.data.network.models.Result
-import com.example.rickandmorty.viewmodels.CharactersViewModel
-import com.example.rickandmorty.compose.utils.CharacterImage
+import com.example.rickandmorty.ui.theme.Gray120
+import com.example.rickandmorty.ui.theme.Gray80
+import com.example.rickandmorty.ui.theme.Gray900
+import com.example.rickandmorty.ui.theme.PurpleGrey80
+import com.example.rickandmorty.data.network.models.Character
+import com.example.rickandmorty.ui.commonUi.CharacterImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterItem(
-    viewModel: CharactersViewModel =  hiltViewModel(),
-    character: Result,
-    onCharacterItemClicked: (Result) -> Unit,
+    character: Character,
+    onCharacterItemClicked: (Character) -> Unit,
 ) {
     Card(
-        onClick = {
-            onCharacterItemClicked(character)
-            viewModel.character = character
-                  },
+        onClick = { onCharacterItemClicked(character) },
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(containerColor = Gray900),
         modifier = Modifier
@@ -42,8 +37,8 @@ fun CharacterItem(
             .height(150.dp)
     ) {
         val statusColor = when (character.status) {
-            "Alive" -> Color.Green
-            "Dead" -> Color.Red
+            stringResource(id = R.string.alive) -> Color.Green
+            stringResource(id = R.string.dead) -> Color.Red
             else -> Color.Gray
         }
         Row(
@@ -74,7 +69,7 @@ fun CharacterItem(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_baseline_circle_24),
-                        contentDescription = "Status image",
+                        contentDescription =  stringResource(id = R.string.status_image_description),
                         colorFilter = ColorFilter.tint(color = statusColor)
                     )
                     InfoText(
@@ -83,7 +78,7 @@ fun CharacterItem(
                     )
                 }
                 Text(
-                    text = "Last location:",
+                    text =  stringResource(id = R.string.last_location),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     color = Gray120

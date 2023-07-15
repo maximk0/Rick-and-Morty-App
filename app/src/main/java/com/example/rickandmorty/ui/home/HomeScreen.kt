@@ -1,4 +1,4 @@
-package com.example.rickandmorty.compose.home
+package com.example.rickandmorty.ui.home
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -17,16 +17,13 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.rickandmorty.R
-import com.example.rickandmorty.compose.characterlist.CharacterListScreen
-import com.example.rickandmorty.compose.location.LocationScreen
-import com.example.rickandmorty.compose.theme.Gray120
-import com.example.rickandmorty.compose.theme.Gray80
-import com.example.rickandmorty.compose.theme.GrayNav
+import com.example.rickandmorty.ui.charactersList.CharacterListScreen
+import com.example.rickandmorty.ui.location.LocationScreen
+import com.example.rickandmorty.ui.theme.Gray120
+import com.example.rickandmorty.ui.theme.Gray80
+import com.example.rickandmorty.ui.theme.GrayNav
 import kotlinx.coroutines.launch
-import com.example.rickandmorty.viewmodels.CharactersViewModel
 
 
 enum class RickAndMortyPage(

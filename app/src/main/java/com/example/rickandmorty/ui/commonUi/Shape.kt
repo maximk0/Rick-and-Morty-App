@@ -1,4 +1,4 @@
-package com.example.rickandmorty.compose
+package com.example.rickandmorty.ui.commonUi
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

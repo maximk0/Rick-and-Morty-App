@@ -1,4 +1,4 @@
-package com.example.rickandmorty.compose.characterlist
+package com.example.rickandmorty.ui.charactersList
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,13 +12,15 @@ import androidx.paging.compose.items
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.rickandmorty.R
+import com.example.rickandmorty.ui.commonUi.LoadingBox
 import com.example.rickandmorty.viewmodels.CharactersViewModel
-import com.example.rickandmorty.data.network.models.Result
+import com.example.rickandmorty.data.network.models.Character
+import com.example.rickandmorty.ui.commonUi.ErrorColumn
 
 @Composable
 fun CharacterListScreen(
     viewModel: CharactersViewModel = hiltViewModel(),
-    onCharacterItemClicked: (Result) -> Unit = {},
+    onCharacterItemClicked: (Character) -> Unit = {},
 ) {
     val characterItems = viewModel.pagedCharacters.collectAsLazyPagingItems()
 
@@ -26,16 +28,18 @@ fun CharacterListScreen(
         items(characterItems) {
             it?.let { character ->
                 CharacterItem(
-                    viewModel = viewModel,
                     character = character,
                     onCharacterItemClicked = { onCharacterItemClicked(character) }
                 )
             } ?: Text(text = stringResource(R.string.oops))
         }
+
         characterItems.apply {
             when {
                 loadState.refresh is LoadState.Loading -> {
                     item {
+                        LoadingBox(modifier = Modifier.fillParentMaxSize())
+
                         Box(
                             modifier = Modifier.fillParentMaxSize(),
                             contentAlignment = Alignment.Center
@@ -47,12 +51,7 @@ fun CharacterListScreen(
 
                 loadState.append is LoadState.Loading -> {
                     item {
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator()
-                        }
+                        LoadingBox(modifier = Modifier.fillMaxWidth())
                     }
                 }
 
@@ -63,17 +62,6 @@ fun CharacterListScreen(
                             loadStateError = characterItems.loadState.refresh as LoadState.Error,
                             onClick = { retry() }
                         )
-
-//                        val e = characterItems.loadState.refresh as LoadState.Error
-//                        Column(modifier = Modifier.fillParentMaxSize()) {
-//                            e.error.localizedMessage?.let {
-//                                Text(text = stringResource(id = R.string.error, it))
-//                            }
-//                            Button(onClick = { retry() }) {
-//                                Text(text = stringResource(R.string.retry))
-//                            }
-//                        }
-
                     }
                 }
 
@@ -86,42 +74,9 @@ fun CharacterListScreen(
                             onClick = { retry() }
                         )
                     }
-
-//                    val e = characterItems.loadState.append as LoadState.Error
-//                    item {
-//                        Column(
-//                            modifier = Modifier.fillParentMaxSize(),
-//                            verticalArrangement = Arrangement.Center
-//                        ) {
-//                            e.error.localizedMessage?.let { Text(text = it) }
-//                            Button(onClick = { retry() }) {
-//                                Text(text = stringResource(R.string.retry))
-//                            }
-//                        }
-//                    }
                 }
+
             }
         }
     }
-}
-
-@Composable
-fun ErrorColumn(
-    modifier: Modifier,
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    loadStateError: LoadState.Error,
-    onClick: () -> Unit
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = verticalArrangement
-    ) {
-        loadStateError.error.localizedMessage?.let {
-            Text(text = stringResource(id = R.string.error, it))
-        }
-        Button(onClick = { onClick() }) {
-            Text(text = stringResource(R.string.retry))
-        }
-    }
-
 }

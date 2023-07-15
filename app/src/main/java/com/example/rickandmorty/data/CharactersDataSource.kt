@@ -3,16 +3,16 @@ package com.example.rickandmorty.data
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rickandmorty.data.network.models.Result
+import com.example.rickandmorty.data.network.models.Character
 import com.example.rickandmorty.data.network.RickAndMortyRepository
 
 class CharactersDataSource(
     private val repository: RickAndMortyRepository
-) : PagingSource<Int, Result>() {
+) : PagingSource<Int, Character>() {
 
-    override fun getRefreshKey(state: PagingState<Int, Result>): Int = FIRST_PAGE
+    override fun getRefreshKey(state: PagingState<Int, Character>): Int = FIRST_PAGE
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         val page = params.key ?: FIRST_PAGE
         return kotlin.runCatching {
             repository.getRickAndMortyCharacters(page)

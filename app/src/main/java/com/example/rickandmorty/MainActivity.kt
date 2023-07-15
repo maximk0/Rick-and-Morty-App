@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.rickandmorty.compose.theme.ComposeTrainingTheme
-import com.example.rickandmorty.compose.theme.Gray1200
-import com.example.rickandmorty.compose.RickAndMortyApp
+import com.example.rickandmorty.ui.theme.ComposeTrainingTheme
+import com.example.rickandmorty.ui.theme.Gray1200
+import com.example.rickandmorty.ui.RickAndMortyApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @Keep

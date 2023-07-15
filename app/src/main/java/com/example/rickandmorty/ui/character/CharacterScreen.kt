@@ -1,4 +1,4 @@
-package com.example.rickandmorty.compose.character
+package com.example.rickandmorty.ui.character
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -22,26 +22,31 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.rickandmorty.compose.theme.Gray120
-import com.example.rickandmorty.compose.theme.Gray1200
-import com.example.rickandmorty.compose.theme.Gray80
-import com.example.rickandmorty.compose.theme.Gray900
+import com.example.rickandmorty.R
+import com.example.rickandmorty.ui.theme.Gray120
+import com.example.rickandmorty.ui.theme.Gray1200
+import com.example.rickandmorty.ui.theme.Gray80
+import com.example.rickandmorty.ui.theme.Gray900
 import com.example.rickandmorty.viewmodels.CharactersViewModel
-import com.example.rickandmorty.compose.utils.CharacterImage
+import com.example.rickandmorty.ui.commonUi.CharacterImage
+import com.example.rickandmorty.data.network.models.Character
 
+const val TAG = "CharacterScreen"
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CharacterScreen(
     viewModel: CharactersViewModel =  hiltViewModel(),
     onBackClick: () -> Unit,
+    character : Character
 ) {
-    val character = viewModel.character
-    Log.d("ViewModelDetail:", "${viewModel.character}")
+    val character = character
+    Log.d(TAG, "character: $character")
     val episodes by viewModel.listOfEpisodes.collectAsState(listOf())
     LaunchedEffect(key1 = true) {
         viewModel.getEpisodes(character?.episode)
@@ -56,7 +61,7 @@ fun CharacterScreen(
             topBar = {
                 CharacterTopBar(
                     onUpClick = onBackClick,
-                    text = character?.name ?: "Character"
+                    text = character?.name ?: stringResource(id = R.string.character)
                 )
             },
         ) {
@@ -75,7 +80,7 @@ fun CharacterScreen(
                         contentScale = ContentScale.Crop
                     )
                     Text(
-                        text = character?.name ?: "",
+                        text = character?.name ?: stringResource(id = R.string.empty_string),
                         lineHeight = 35.sp,
                         fontSize = 35.sp,
                         color = Gray80,
@@ -89,16 +94,16 @@ fun CharacterScreen(
                         thickness = 1.dp
                     )
 
-                    GrayDetailText("Live status:")
+                    GrayDetailText(stringResource(id = R.string.live_status))
                     InfoDetailText("${character?.status}")
-                    GrayDetailText("Species and gender:")
+                    GrayDetailText(stringResource(id = R.string.species_gender))
                     InfoDetailText("${character?.species} (${character?.gender})")
-                    GrayDetailText("Last known location:")
-                    InfoDetailText(character?.location?.name ?: "")
+                    GrayDetailText(stringResource(id = R.string.last_location))
+                    InfoDetailText(character?.location?.name ?: stringResource(id = R.string.empty_string))
 
                     Text(
                         modifier = Modifier.padding(top = 30.dp),
-                        text = "Episodes",
+                        text = stringResource(id = R.string.episodes),
                         fontSize = 35.sp,
                         color = Gray80,
                         fontWeight = FontWeight.Medium,

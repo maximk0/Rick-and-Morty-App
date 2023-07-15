@@ -1,4 +1,4 @@
-package com.example.rickandmorty.compose.location
+package com.example.rickandmorty.ui.location
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,12 +8,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.example.rickandmorty.compose.theme.Gray120
-import com.example.rickandmorty.compose.theme.Gray900
-import com.example.rickandmorty.compose.theme.PurpleGrey80
-import com.example.rickandmorty.compose.characterlist.InfoText
+import com.example.rickandmorty.R
+import com.example.rickandmorty.ui.theme.Gray120
+import com.example.rickandmorty.ui.theme.Gray900
+import com.example.rickandmorty.ui.theme.PurpleGrey80
+import com.example.rickandmorty.ui.charactersList.InfoText
 import com.example.rickandmorty.data.network.models.LocationsDto
 
 @Composable
@@ -41,10 +43,10 @@ fun LocationItem(location: LocationsDto) {
                     overflow = TextOverflow.Ellipsis,
                     color = PurpleGrey80
                 )
-                InfoText("Type: ${location.type}")
-                InfoText("Dimension: ${location.dimension}")
+                InfoText( stringResource(id = R.string.type, location.type))
+                InfoText( stringResource(id = R.string.dimension, location.dimension))
                 Text(
-                    text = "Created: ${location.created}",
+                    text =  stringResource(id = R.string.created, location.created),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     color = Gray120

@@ -1,14 +1,14 @@
-package com.example.rickandmorty.compose
+package com.example.rickandmorty.ui
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.rickandmorty.compose.character.CharacterScreen
-import com.example.rickandmorty.compose.location.LocationScreen
-import com.example.rickandmorty.compose.home.HomeScreen
-import com.example.rickandmorty.compose.home.RickAndMortyPage
+import com.example.rickandmorty.ui.character.CharacterScreen
+import com.example.rickandmorty.ui.location.LocationScreen
+import com.example.rickandmorty.ui.home.HomeScreen
+import com.example.rickandmorty.ui.home.RickAndMortyPage
 
 @Composable
 fun RickAndMortyApp(
@@ -26,20 +26,24 @@ fun RickAndMortyNavHost(
     navController: NavHostController,
     onPageChange: (RickAndMortyPage) -> Unit = {},
 ) {
-    NavHost(navController = navController, startDestination = "home") {
-        composable("home") {
+    NavHost(navController = navController, startDestination = HOME) {
+        composable(HOME) {
             HomeScreen(
-                onCharacterClick = { navController.navigate("character") },
+                onCharacterClick = { navController.navigate(CHARACTER) },
                 onPageChange = onPageChange
             )
         }
-        composable("character") {
+        composable(CHARACTER) {
             CharacterScreen(
                  onBackClick = { navController.navigateUp() }
             )
         }
-        composable("location") {
+        composable(LOCATION) {
             LocationScreen()
         }
     }
 }
+
+const val HOME = "home"
+const val CHARACTER = "character"
+const val LOCATION = "location"

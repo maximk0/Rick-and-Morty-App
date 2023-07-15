@@ -2,8 +2,19 @@
     <string name="app_name">Rick and Morty</string>
     <string name="last_location">Last known location:</string>
     <string name="all_characters">Characters</string>
+    <string name="episodes">Episodes</string>
     <string name="location">Location</string>
     <string name="oops">Oops</string>
     <string name="retry">Retry</string>
     <string name="error">Error: %s</string>
+    <string name="live_status">Live status:</string>
+    <string name="species_gender">Species and gender:</string>
+    <string name="character">Character</string>
+    <string name="empty_string"></string>
+    <string name="alive">Alive</string>
+    <string name="dead">Dead</string>
+    <string name="status_image_description">Status image description</string>
+    <string name="type">Type: %s</string>
+    <string name="dimension">Dimension: %s</string>
+    <string name="created">Created: %s</string>
 </resources>
