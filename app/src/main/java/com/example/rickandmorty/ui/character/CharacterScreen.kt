@@ -36,6 +36,7 @@ import com.example.rickandmorty.ui.theme.Gray900
 import com.example.rickandmorty.viewmodels.CharactersViewModel
 import com.example.rickandmorty.ui.commonUi.CharacterImage
 import com.example.rickandmorty.data.network.models.Character
+import kotlinx.coroutines.flow.onEach
 
 const val TAG = "CharacterScreen"
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -43,13 +44,13 @@ const val TAG = "CharacterScreen"
 fun CharacterScreen(
     viewModel: CharactersViewModel =  hiltViewModel(),
     onBackClick: () -> Unit,
-    character : Character
+//    character : Character
 ) {
-    val character = character
+     val character by viewModel.character.collectAsState(Character())
     Log.d(TAG, "character: $character")
     val episodes by viewModel.listOfEpisodes.collectAsState(listOf())
     LaunchedEffect(key1 = true) {
-        viewModel.getEpisodes(character?.episode)
+        viewModel.getEpisodes(character.episode)
     }
     Column(
         modifier = Modifier

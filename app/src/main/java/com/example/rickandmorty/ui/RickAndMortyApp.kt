@@ -1,14 +1,16 @@
 package com.example.rickandmorty.ui
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.rickandmorty.ui.character.CharacterScreen
+import com.example.rickandmorty.ui.home.HomePagerScreen
 import com.example.rickandmorty.ui.location.LocationScreen
-import com.example.rickandmorty.ui.home.HomeScreen
 import com.example.rickandmorty.ui.home.RickAndMortyPage
+import com.example.rickandmorty.viewmodels.CharactersViewModel
 
 @Composable
 fun RickAndMortyApp(
@@ -23,18 +25,23 @@ fun RickAndMortyApp(
 
 @Composable
 fun RickAndMortyNavHost(
+    viewModel: CharactersViewModel = hiltViewModel(),
     navController: NavHostController,
     onPageChange: (RickAndMortyPage) -> Unit = {},
 ) {
     NavHost(navController = navController, startDestination = HOME) {
         composable(HOME) {
-            HomeScreen(
-                onCharacterClick = { navController.navigate(CHARACTER) },
+            HomePagerScreen(
+                onCharacterClick = {
+                    viewModel.getCharacter(it)
+                    navController.navigate(CHARACTER)
+                                   },
                 onPageChange = onPageChange
             )
         }
         composable(CHARACTER) {
             CharacterScreen(
+                viewModel = viewModel,
                  onBackClick = { navController.navigateUp() }
             )
         }

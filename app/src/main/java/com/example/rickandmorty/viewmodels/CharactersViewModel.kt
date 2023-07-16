@@ -14,7 +14,9 @@ import com.example.rickandmorty.data.network.models.EpisodesDto
 import com.example.rickandmorty.data.network.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,17 +29,30 @@ class CharactersViewModel @Inject constructor(
         pagingSourceFactory = { CharactersDataSource(repository) }
     ).flow.cachedIn(viewModelScope)
 
-//    var character: Result? = null
-
-    fun reloadList() {
-        pagedCharacters = Pager(
-            config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = { CharactersDataSource(repository) }
-        ).flow.cachedIn(viewModelScope)
-    }
+    private var _character = MutableStateFlow(Character())
+    val character = _character.asSharedFlow()
 
     private var _listOfEpisodes = MutableSharedFlow<List<EpisodesDto>>()
     val listOfEpisodes = _listOfEpisodes.asSharedFlow()
+
+    fun getCharacter(character: Character) {
+       _character.update { character ->
+           character.copy(
+               created = character.created,
+               episode = character.episode,
+               gender = character.gender,
+               id = character.id,
+               image = character.image,
+               location = character.location,
+               name = character.name,
+               origin = character.origin,
+               species = character.species,
+               status = character.status,
+               type = character.type,
+               url = character.url
+           )
+       }
+    }
 
     fun getEpisodes(episodes: List<String>?) {
         viewModelScope.launch {

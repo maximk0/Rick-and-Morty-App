@@ -17,12 +17,15 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.rememberNestedScrollInteropConnection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.rickandmorty.R
+import com.example.rickandmorty.data.network.models.Character
 import com.example.rickandmorty.ui.charactersList.CharacterListScreen
 import com.example.rickandmorty.ui.location.LocationScreen
 import com.example.rickandmorty.ui.theme.Gray120
 import com.example.rickandmorty.ui.theme.Gray80
 import com.example.rickandmorty.ui.theme.GrayNav
+import com.example.rickandmorty.viewmodels.CharactersViewModel
 import kotlinx.coroutines.launch
 
 
@@ -36,25 +39,23 @@ enum class RickAndMortyPage(
     LOCATION(R.string.location, R.drawable.ic_location)
 }
 
-@Composable
-fun HomeScreen(
+//@Composable
+//fun HomeScreen(
 //    viewModel: CharactersViewModel = hiltViewModel(),
-    onCharacterClick: () -> Unit = {},
-    onPageChange: (RickAndMortyPage) -> Unit = {},
-) {
-    HomePagerScreen(
-//        viewModel = viewModel,
-        onCharacterClick = onCharacterClick,
-        onPageChange = onPageChange
-    )
-}
+//    onCharacterClick: (Character) -> Unit,
+//    onPageChange: (RickAndMortyPage) -> Unit = {},
+//) {
+//    HomePagerScreen(
+//        onCharacterClick = {onCharacterClick(viewModel.getCharacter(it))},
+//        onPageChange = onPageChange
+//    )
+//}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomePagerScreen(
     modifier: Modifier = Modifier,
-//    viewModel: CharactersViewModel = viewModel(),
-    onCharacterClick: () -> Unit,
+    onCharacterClick: (Character) -> Unit,
     onPageChange: (RickAndMortyPage) -> Unit,
     pages: Array<RickAndMortyPage> = RickAndMortyPage.values()
 ) {
@@ -95,7 +96,7 @@ fun HomePagerScreen(
             when (pages[index]) {
                 RickAndMortyPage.ALL_CHARACTERS -> {
                     CharacterListScreen(
-                        onCharacterItemClicked = { onCharacterClick() }
+                        onCharacterItemClicked = { character -> onCharacterClick(character) }
                     )
                 }
 
