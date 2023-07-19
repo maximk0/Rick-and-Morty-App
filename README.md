@@ -5,9 +5,9 @@ This app uses Rick and Morty API to display of information about the characters 
 1. Kotlin
 2. MVVM - Single Activity Architecture
 3. Jetpack Compose
-4. Flow - StateFlow
-5. Coroutines
-6. Dagger 2 DI
+4. Coroutines
+5. Flow - StateFlow
+6. Hilt
 7. Retrofit 2
 8. Moshi
 
