@@ -1,5 +1,6 @@
 package com.example.rickandmorty.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 import com.example.rickandmorty.data.network.models.Character
 import com.example.rickandmorty.data.network.models.EpisodesDto
 import com.example.rickandmorty.data.network.RickAndMortyRepository
+import com.example.rickandmorty.ui.character.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +25,10 @@ import javax.inject.Inject
 class CharactersViewModel @Inject constructor(
     private val repository: RickAndMortyRepository
 ) : ViewModel() {
+
+    init {
+        Log.d(TAG, "view model init")
+    }
 
     var pagedCharacters: Flow<PagingData<Character>> = Pager(
         config = PagingConfig(pageSize = 10),
@@ -52,6 +58,7 @@ class CharactersViewModel @Inject constructor(
                url = character.url
            )
        }
+        Log.d("CharacterScreen", "character: $character")
     }
 
     fun getEpisodes(episodes: List<String>?) {

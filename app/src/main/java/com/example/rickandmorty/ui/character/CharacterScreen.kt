@@ -42,7 +42,7 @@ const val TAG = "CharacterScreen"
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CharacterScreen(
-    viewModel: CharactersViewModel =  hiltViewModel(),
+    viewModel: CharactersViewModel,
     onBackClick: () -> Unit,
 //    character : Character
 ) {
