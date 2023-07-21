@@ -13,6 +13,4 @@ This app uses Rick and Morty API to display of information about the characters 
 
 ## Preview
 
-![Screenshot](list of characters.png)
-![Screenshot](location.png)
-![Screenshot](no connection.png)
+![Screenshot](list of characters.png) ![Screenshot](location.png) ![Screenshot](no connection.png)
