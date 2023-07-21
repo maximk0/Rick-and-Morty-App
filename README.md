@@ -12,3 +12,7 @@ This app uses Rick and Morty API to display of information about the characters 
 8. Moshi
 
 ## Preview
+
+![Screenshot](list of characters.png)
+![Screenshot](location.png)
+![Screenshot](no connection.png)
