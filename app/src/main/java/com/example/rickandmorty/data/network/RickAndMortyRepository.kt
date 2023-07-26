@@ -8,15 +8,28 @@ import com.example.rickandmorty.data.network.models.Character
 import javax.inject.Inject
 
 class RickAndMortyRepository @Inject constructor(
-    private val rickAndMortyApi : RickAndMortyApi
-)  {
+    private val rickAndMortyApi: RickAndMortyApi
+) {
 
     suspend fun getRickAndMortyCharacters(page: Int): List<Character> {
         Log.d(TAG, "${rickAndMortyApi.loadList(page).results}")
         return rickAndMortyApi.loadList(page).results
     }
 
-    suspend fun getEpisode(id: String) : EpisodesDto {
+    suspend fun getCharacter(id: String): Character? {
+        return try {
+            val result = rickAndMortyApi.getCharacter(id)
+            Log.d(TAG, "get character from repo: $result")
+            result
+        } catch (e: Exception) {
+            Log.d(TAG, "error from repo:$e")
+            null
+        }
+    }
+
+
+
+    suspend fun getEpisode(id: String): EpisodesDto {
         Log.d(TAG, "${rickAndMortyApi.getEpisode(id)}")
         return rickAndMortyApi.getEpisode(id)
     }

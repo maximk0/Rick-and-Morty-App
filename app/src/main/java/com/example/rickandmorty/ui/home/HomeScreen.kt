@@ -99,7 +99,6 @@ fun HomePagerScreen(
                         onCharacterItemClicked = { character -> onCharacterClick(character) }
                     )
                 }
-
                 RickAndMortyPage.LOCATION -> {
                     LocationScreen()
                 }

@@ -1,5 +1,6 @@
 package com.example.rickandmorty.ui.charactersList
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -15,6 +16,7 @@ import com.example.rickandmorty.R
 import com.example.rickandmorty.ui.commonUi.LoadingBox
 import com.example.rickandmorty.viewmodels.CharactersViewModel
 import com.example.rickandmorty.data.network.models.Character
+import com.example.rickandmorty.ui.character.TAG
 import com.example.rickandmorty.ui.commonUi.ErrorColumn
 
 @Composable
