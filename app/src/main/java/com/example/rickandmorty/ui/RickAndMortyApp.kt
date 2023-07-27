@@ -45,7 +45,7 @@ fun RickAndMortyNavHost(
 
             HomePagerScreen(
                 onCharacterClick = { character ->
-                    Log.d(TAG, "id arg: ${character.id}")
+                    Log.d(TAG, "id arg main: ${character.id}")
                     navController.navigate("${RickAndMortyScreen.Character.name}/${character.id}")
                 },
                 onPageChange = onPageChange
@@ -57,11 +57,11 @@ fun RickAndMortyNavHost(
         ) { backStackEntry ->
 
             backStackEntry.arguments?.getString("id")?.let {
-                Log.d(TAG, "id arg: $id")
+                Log.d(TAG, "id arg char: $id")
                 CharacterScreen(
-                    viewModel = viewModel,
-                    onBackClick = { navController.navigateUp() },
-                    id = it
+//                    viewModel = viewModel,
+                    onBackClick = { navController.navigateUp() }
+//                    id = it
                 )
             }
         }
