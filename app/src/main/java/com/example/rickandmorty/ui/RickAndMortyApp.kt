@@ -45,7 +45,7 @@ fun RickAndMortyNavHost(
 
             HomePagerScreen(
                 onCharacterClick = { character ->
-                    Log.d(TAG, "id arg main: ${character.id}")
+                    Log.d(TAG, "id arg home screen: ${character.id}")
                     navController.navigate("${RickAndMortyScreen.Character.name}/${character.id}")
                 },
                 onPageChange = onPageChange
@@ -53,17 +53,17 @@ fun RickAndMortyNavHost(
         }
         composable(
             route = "${RickAndMortyScreen.Character.name}/{id}",
-            arguments = listOf(navArgument("id") { type = NavType.StringType })
-        ) { backStackEntry ->
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { //backStackEntry ->
 
-            backStackEntry.arguments?.getString("id")?.let {
-                Log.d(TAG, "id arg char: $id")
-                CharacterScreen(
+//            backStackEntry.arguments?.getString("id")?.let {
+            Log.d(TAG, "char screen id arg: $id")
+            CharacterScreen(
 //                    viewModel = viewModel,
-                    onBackClick = { navController.navigateUp() }
+                onBackClick = { navController.navigateUp() }
 //                    id = it
-                )
-            }
+            )
+//            }
         }
         composable(route = RickAndMortyScreen.Location.name) {
             LocationScreen()

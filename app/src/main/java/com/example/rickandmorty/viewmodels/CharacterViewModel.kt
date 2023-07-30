@@ -14,8 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.math.RoundingMode
-import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,7 +22,7 @@ class CharacterViewModel @Inject constructor(
     private val repository: RickAndMortyRepository
 ) : ViewModel() {
 
-    private val characterId: String = checkNotNull(savedStateHandle["id"])
+     val characterId: Int = savedStateHandle.get<Int>(CHARACTER_ID_SAVED_STATE_KEY)!!
 
     private val _character = MutableStateFlow<Character?>(null)
     val character = _character.asStateFlow()
@@ -33,42 +31,52 @@ class CharacterViewModel @Inject constructor(
     val listOfEpisodes = _listOfEpisodes.asSharedFlow()
 
     init {
-        Log.d(TAG, "init id arg: $characterId")
         getCharacter(characterId)
     }
 
-    private fun getCharacter(id: String) {
+    fun getCharacter(id: Int = characterId) {
         viewModelScope.launch {
             try {
+                Log.d(TAG, "BEFORE get id character: $id, character: ${character.collect{it}}")
                 _character.value =  repository.getCharacter(id)
+                Log.d(TAG, "AFTER get id character: $id, character: ${character.collect{ it }}")
             } catch (e: Exception) {
                 Log.e(TAG, "error from repo vm:$e")
             }
-            Log.d(TAG, "get character: $id")
+            Log.d(TAG, "get id character: $id, character: ${character.collect{ it }}")
 
         }
     }
 
-    fun getEpisodes(episodes: List<String>?) {
-        viewModelScope.launch {
-            val numberOfEpisode = mutableListOf<String>()
+    fun getEpisodes(episodes: List<String?>?) {
+        if (episodes != null) {
 
-            episodes?.forEach{
-                numberOfEpisode.add(it.replace(Regex("\\D"), ""))
+            val numberOfEpisode = mutableListOf<String>()
+            episodes.forEach {
+                if (it != null) {
+                    numberOfEpisode.add(it.replace(Regex("\\D"), ""))
+                }
             }
-            if (episodes?.size == 1) {
-                _listOfEpisodes.emit(
-                    listOf(
-                        repository.getEpisode(numberOfEpisode.first().toString())
+
+            viewModelScope.launch {
+                if (episodes.size == 1) {
+                    _listOfEpisodes.emit(
+                        listOf(
+                            repository.getEpisode(numberOfEpisode.first().toString())
+                        )
                     )
-                )
-            } else {
-                _listOfEpisodes.emit(
-                    repository.getListOfEpisodes(
-                        numberOfEpisode.toString()
+                } else {
+                    _listOfEpisodes.emit(
+                        repository.getListOfEpisodes(
+                            numberOfEpisode.toString()
+                        )
                     )
-                )
+                }
             }
         }
+    }
+
+    companion object {
+        private const val CHARACTER_ID_SAVED_STATE_KEY = "id"
     }
 }

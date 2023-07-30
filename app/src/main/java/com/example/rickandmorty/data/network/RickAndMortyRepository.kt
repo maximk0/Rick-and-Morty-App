@@ -16,13 +16,13 @@ class RickAndMortyRepository @Inject constructor(
         return rickAndMortyApi.loadList(page).results
     }
 
-    suspend fun getCharacter(id: String): Character? {
+    suspend fun getCharacter(id: Int): Character? {
         return try {
             val result = rickAndMortyApi.getCharacter(id)
             Log.d(TAG, "get character from repo: $result")
             result
         } catch (e: Exception) {
-            Log.d(TAG, "error from repo:$e")
+            Log.e(TAG, "error from repo:$e, id arg $id")
             null
         }
     }

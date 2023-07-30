@@ -13,10 +13,13 @@ import kotlinx.coroutines.launch
 import com.example.rickandmorty.data.network.models.Character
 import com.example.rickandmorty.data.network.models.EpisodesDto
 import com.example.rickandmorty.data.network.RickAndMortyRepository
+import com.example.rickandmorty.data.network.models.Pers
 import com.example.rickandmorty.ui.character.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel

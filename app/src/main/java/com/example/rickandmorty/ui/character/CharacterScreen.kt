@@ -33,9 +33,11 @@ import com.example.rickandmorty.ui.theme.Gray120
 import com.example.rickandmorty.ui.theme.Gray1200
 import com.example.rickandmorty.ui.theme.Gray80
 import com.example.rickandmorty.ui.theme.Gray900
-import com.example.rickandmorty.viewmodels.CharactersViewModel
 import com.example.rickandmorty.ui.commonUi.CharacterImage
 import com.example.rickandmorty.viewmodels.CharacterViewModel
+import com.example.rickandmorty.data.network.models.Character
+import com.example.rickandmorty.data.network.models.Location
+import com.example.rickandmorty.data.network.models.Origin
 
 const val TAG = "CharacterScreen"
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -45,12 +47,14 @@ fun CharacterScreen(
     onBackClick: () -> Unit,
 //    id: String
 ) {
-//    viewModel.getCharacter(id)
-     val character by viewModel.character.collectAsState()
-    Log.d(TAG, "character: ${character.toString()}")
-    val episodes by viewModel.listOfEpisodes.collectAsState(listOf())
-    LaunchedEffect(key1 = true) {
+    Log.d(TAG, "character screen id arg init")
 
+    val character by viewModel.character.collectAsState()
+    Log.d(TAG, "character screen char arg: ${character.toString()}")
+    val episodes by viewModel.listOfEpisodes.collectAsState(listOf())
+    Log.d(TAG, "character screen episodes arg: $episodes")
+    LaunchedEffect(key1 = true) {
+        viewModel.getCharacter(viewModel.characterId)
         viewModel.getEpisodes(character?.episode)
     }
     Column(
