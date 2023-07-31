@@ -40,22 +40,27 @@ import com.example.rickandmorty.data.network.models.Location
 import com.example.rickandmorty.data.network.models.Origin
 
 const val TAG = "CharacterScreen"
+
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CharacterScreen(
     viewModel: CharacterViewModel = hiltViewModel(),
-    onBackClick: () -> Unit,
-//    id: String
+    onBackClick: () -> Unit
 ) {
-    Log.d(TAG, "character screen id arg init")
 
     val character by viewModel.character.collectAsState()
-    Log.d(TAG, "character screen char arg: ${character.toString()}")
+    Log.d(TAG, "UI char: ${character.toString()}")
     val episodes by viewModel.listOfEpisodes.collectAsState(listOf())
-    Log.d(TAG, "character screen episodes arg: $episodes")
-    LaunchedEffect(key1 = true) {
-        viewModel.getCharacter(viewModel.characterId)
-        viewModel.getEpisodes(character?.episode)
+//    Log.d(TAG, "UI  episodes: $episodes")
+    LaunchedEffect(character) {
+//        viewModel.getCharacter(viewModel.characterId)
+//        Log.d(TAG, "UI launched effect: $character")
+        if (character != null){
+            Log.d(TAG, "UI launched effect char: $character")
+            viewModel.getEpisodes(character!!.episode)
+            Log.d(TAG, "UI  episodes: $episodes")
+        }
+
     }
     Column(
         modifier = Modifier
@@ -105,7 +110,9 @@ fun CharacterScreen(
                     GrayDetailText(stringResource(id = R.string.species_gender))
                     InfoDetailText("${character?.species} (${character?.gender})")
                     GrayDetailText(stringResource(id = R.string.last_location))
-                    InfoDetailText(character?.location?.name ?: stringResource(id = R.string.empty_string))
+                    InfoDetailText(
+                        character?.location?.name ?: stringResource(id = R.string.empty_string)
+                    )
 
                     Text(
                         modifier = Modifier.padding(top = 30.dp),
@@ -125,7 +132,6 @@ fun CharacterScreen(
                             .fillMaxWidth()
                             .padding(bottom = 10.dp, top = 10.dp)
                     ) {
-
                         Column {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -142,7 +148,6 @@ fun CharacterScreen(
                                 )
 
                                 Text(
-                                    modifier = Modifier.padding(10.dp),
                                     text = item.episode,
                                     color = Gray120
                                 )
@@ -151,7 +156,7 @@ fun CharacterScreen(
                             Row {
                                 Text(
                                     modifier = Modifier.padding(10.dp),
-                                    text = item.airDate,
+                                    text = item.airDate ?: stringResource(id = R.string.empty_string),
                                     color = Gray120
                                 )
                             }

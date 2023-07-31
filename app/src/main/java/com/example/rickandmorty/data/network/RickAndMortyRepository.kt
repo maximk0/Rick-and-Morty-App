@@ -19,10 +19,10 @@ class RickAndMortyRepository @Inject constructor(
     suspend fun getCharacter(id: Int): Character? {
         return try {
             val result = rickAndMortyApi.getCharacter(id)
-            Log.d(TAG, "get character from repo: $result")
+            Log.d(TAG1, "Repo getCharacter: $result")
             result
         } catch (e: Exception) {
-            Log.e(TAG, "error from repo:$e, id arg $id")
+            Log.e(TAG1, "Repo getCharacter error:$e, id arg $id")
             null
         }
     }
@@ -45,5 +45,6 @@ class RickAndMortyRepository @Inject constructor(
 
     companion object {
         private const val TAG = "RickAndMortyRepository"
+        private const val TAG1 = "CharacterScreen"
     }
 }

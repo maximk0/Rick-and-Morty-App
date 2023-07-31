@@ -4,7 +4,6 @@ import com.example.rickandmorty.data.network.models.AllLocationDto
 import com.example.rickandmorty.data.network.models.EpisodesDto
 import com.example.rickandmorty.data.network.models.CharactersList
 import com.example.rickandmorty.data.network.models.Character
-import com.example.rickandmorty.data.network.models.Pers
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

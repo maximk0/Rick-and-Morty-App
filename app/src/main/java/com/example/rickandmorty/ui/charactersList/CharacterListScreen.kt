@@ -1,11 +1,9 @@
 package com.example.rickandmorty.ui.charactersList
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -17,7 +15,6 @@ import com.example.rickandmorty.R
 import com.example.rickandmorty.ui.commonUi.LoadingBox
 import com.example.rickandmorty.viewmodels.CharactersViewModel
 import com.example.rickandmorty.data.network.models.Character
-import com.example.rickandmorty.ui.character.TAG
 import com.example.rickandmorty.ui.commonUi.ErrorColumn
 
 @Composable
@@ -26,12 +23,6 @@ fun CharacterListScreen(
     onCharacterItemClicked: (Character) -> Unit = {},
 ) {
     val characterItems = viewModel.pagedCharacters.collectAsLazyPagingItems()
-
-    LaunchedEffect(characterItems.itemCount) {
-        viewModel.getCharacter(1)
-        Log.d(TAG, "CharacterListScreen id args get char: ${viewModel.character.value}")
-    }
-
 
     LazyColumn {
         items(characterItems) {
