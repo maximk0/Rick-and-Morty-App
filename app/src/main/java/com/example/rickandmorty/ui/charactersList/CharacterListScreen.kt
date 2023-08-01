@@ -13,9 +13,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.rickandmorty.R
 import com.example.rickandmorty.ui.commonUi.LoadingBox
-import com.example.rickandmorty.viewmodels.CharactersViewModel
 import com.example.rickandmorty.data.network.models.Character
 import com.example.rickandmorty.ui.commonUi.ErrorColumn
+import com.example.rickandmorty.viewmodels.CharactersViewModel
 
 @Composable
 fun CharacterListScreen(

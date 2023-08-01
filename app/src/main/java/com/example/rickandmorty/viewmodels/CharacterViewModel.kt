@@ -9,9 +9,6 @@ import com.example.rickandmorty.data.network.models.Character
 import com.example.rickandmorty.data.network.models.EpisodesDto
 import com.example.rickandmorty.ui.character.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -25,7 +22,7 @@ class CharacterViewModel @Inject constructor(
     private val repository: RickAndMortyRepository
 ) : ViewModel() {
 
-    val characterId: Int = savedStateHandle.get<Int>(CHARACTER_ID_SAVED_STATE_KEY)!!
+    private val characterId: Int = savedStateHandle.get<Int>(CHARACTER_ID_SAVED_STATE_KEY)!!
 
     private val _character = MutableStateFlow<Character?>(null)
     val character = _character.asStateFlow()
@@ -41,7 +38,6 @@ class CharacterViewModel @Inject constructor(
         viewModelScope.safeLaunch {
             _character.value = repository.getCharacter(id)
         }
-        Log.d(TAG, "VM getCharacter out launch: $id, character: ${character.value}")
     }
 
     fun getEpisodes(episodes: List<String>) {

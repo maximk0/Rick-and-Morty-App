@@ -35,9 +35,6 @@ import com.example.rickandmorty.ui.theme.Gray80
 import com.example.rickandmorty.ui.theme.Gray900
 import com.example.rickandmorty.ui.commonUi.CharacterImage
 import com.example.rickandmorty.viewmodels.CharacterViewModel
-import com.example.rickandmorty.data.network.models.Character
-import com.example.rickandmorty.data.network.models.Location
-import com.example.rickandmorty.data.network.models.Origin
 
 const val TAG = "CharacterScreen"
 
@@ -51,10 +48,8 @@ fun CharacterScreen(
     val character by viewModel.character.collectAsState()
     Log.d(TAG, "UI char: ${character.toString()}")
     val episodes by viewModel.listOfEpisodes.collectAsState(listOf())
-//    Log.d(TAG, "UI  episodes: $episodes")
+
     LaunchedEffect(character) {
-//        viewModel.getCharacter(viewModel.characterId)
-//        Log.d(TAG, "UI launched effect: $character")
         if (character != null){
             Log.d(TAG, "UI launched effect char: $character")
             viewModel.getEpisodes(character!!.episode)
@@ -143,20 +138,13 @@ fun CharacterScreen(
                                     color = Gray80,
                                     fontWeight = FontWeight.Bold,
                                     modifier = Modifier
-                                        .padding(10.dp)
+                                        .padding(6.dp)
                                         .requiredWidth(200.dp)
                                 )
 
                                 Text(
+                                    modifier = Modifier.padding(6.dp),
                                     text = item.episode,
-                                    color = Gray120
-                                )
-                            }
-
-                            Row {
-                                Text(
-                                    modifier = Modifier.padding(10.dp),
-                                    text = item.airDate ?: stringResource(id = R.string.empty_string),
                                     color = Gray120
                                 )
                             }

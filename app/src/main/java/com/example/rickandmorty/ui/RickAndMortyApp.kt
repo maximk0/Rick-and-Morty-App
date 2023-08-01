@@ -1,8 +1,6 @@
 package com.example.rickandmorty.ui
 
-import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -10,11 +8,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.rickandmorty.ui.character.CharacterScreen
-import com.example.rickandmorty.ui.character.TAG
 import com.example.rickandmorty.ui.home.HomePagerScreen
 import com.example.rickandmorty.ui.location.LocationScreen
 import com.example.rickandmorty.ui.home.RickAndMortyPage
-import com.example.rickandmorty.viewmodels.CharactersViewModel
 
 enum class RickAndMortyScreen {
     Home,
@@ -35,11 +31,11 @@ fun RickAndMortyApp(
 
 @Composable
 fun RickAndMortyNavHost(
-    viewModel: CharactersViewModel = hiltViewModel(),
     navController: NavHostController,
     onPageChange: (RickAndMortyPage) -> Unit = {},
 ) {
     NavHost(navController = navController, startDestination = RickAndMortyScreen.Home.name) {
+
         composable(route = RickAndMortyScreen.Home.name) {
             HomePagerScreen(
                 onCharacterClick = { character ->
@@ -48,6 +44,7 @@ fun RickAndMortyNavHost(
                 onPageChange = onPageChange
             )
         }
+
         composable(
             route = "${RickAndMortyScreen.Character.name}/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
@@ -56,13 +53,10 @@ fun RickAndMortyNavHost(
                 onBackClick = { navController.navigateUp() }
             )
         }
+
         composable(route = RickAndMortyScreen.Location.name) {
             LocationScreen()
         }
+
     }
 }
-
-data class RickAndMortyPage(
-    val titleResId: Int,
-    val drawableResId: Int
-)

@@ -27,8 +27,6 @@ class RickAndMortyRepository @Inject constructor(
         }
     }
 
-
-
     suspend fun getEpisode(id: String): EpisodesDto {
         Log.d(TAG, "${rickAndMortyApi.getEpisode(id)}")
         return rickAndMortyApi.getEpisode(id)

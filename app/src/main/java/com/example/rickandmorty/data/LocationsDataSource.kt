@@ -19,7 +19,7 @@ class LocationsDataSource(
             repository.getLocation(page)
         }.fold(
             onSuccess = {
-                Log.d("FAILTAG", "Location success: $it")
+                Log.d(TAG, "Location success: $it")
                 LoadResult.Page(
                     data = it,
                     prevKey = null,
@@ -28,12 +28,13 @@ class LocationsDataSource(
 
             },
             onFailure = {
-                Log.d("FAILTAG", "Location fail: $it")
+                Log.d(TAG, "Location fail: $it")
                 LoadResult.Error(it)
             })
     }
 
     private companion object {
         private const val FIRST_PAGE = 1
+        private const val TAG = "LocationsDataSource"
     }
 }
